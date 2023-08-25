@@ -1,3 +1,3 @@
-# Introduction to clojitlein
+# Introduction to clojit
 
 TODO: write [great documentation](http://jacobian.org/writing/what-to-write/)

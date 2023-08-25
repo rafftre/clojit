@@ -1,4 +1,4 @@
-(ns clojitlein.core
+(ns clojit.core
   (:require [clojure.java.io :as io]
             [clojure.string :as str])
   (:import [org.eclipse.jgit.api Git]
