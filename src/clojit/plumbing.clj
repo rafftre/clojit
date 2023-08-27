@@ -1,6 +1,7 @@
 (ns clojit.plumbing
   (:require [clojure.java.io :as io])
-  (:import [org.eclipse.jgit.storage.file FileRepositoryBuilder]))
+  (:import [org.eclipse.jgit.lib ObjectId]
+           [org.eclipse.jgit.storage.file FileRepositoryBuilder]))
 
 (defn open
   "Return a handle to interact with a repository using plumbing commands.
@@ -11,3 +12,17 @@
       (.readEnvironment)
       (.findGitDir)
       (.build)))
+
+(defn close
+  "Close and free resources."
+  [repo]
+  (.close repo))
+
+(defn get-object-content
+  "Return the object content as a string."
+  [repo branch]
+  (let [oid (ObjectId/fromString (:object branch))]
+    (-> repo
+        (.open oid)
+        (.getBytes)
+        (String.))))

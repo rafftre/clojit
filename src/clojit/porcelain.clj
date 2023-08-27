@@ -9,6 +9,16 @@
   [repo-dir-path]
   (Git/open (io/file repo-dir-path)))
 
+(defn get-repo
+  "Return a handle to interact with the repository using plumbing commands."
+  [git]
+  (.getRepository git))
+
+(defn close
+  "Close and free resources."
+  [git]
+  (.close git))
+
 (defn- create-ref
   "Create a reference, i.e. a pair of a name and an object id.
   The name is a stripped down string with the prefix removed using the provided
@@ -20,13 +30,13 @@
     {:name name :object object}))
 
 (defn branch-list
-  "Return a list with the local branch/head names."
-  [repo]
-  (let [refs (-> repo (.branchList) (.call))]
+  "Return a list with the local branch (head) names."
+  [git]
+  (let [refs (-> git (.branchList) (.call))]
     (map #(create-ref % #"refs/heads/") refs)))
 
 (defn tag-list
   "Return a list with the tag names."
-  [repo]
-  (let [refs (-> repo (.tagList) (.call))]
+  [git]
+  (let [refs (-> git (.tagList) (.call))]
     (map #(create-ref % #"refs/tags/") refs)))
