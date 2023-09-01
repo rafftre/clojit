@@ -40,3 +40,9 @@
   [git]
   (let [refs (-> git (.tagList) (.call))]
     (map #(create-ref % #"refs/tags/") refs)))
+
+(defn get-branch
+  "Return a branch reference with the specified name."
+  [git branch-name]
+  (let [branches (branch-list git)]
+    (some #(and (= (:name %) branch-name) %) branches)))

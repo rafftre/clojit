@@ -18,7 +18,7 @@
   [repo]
   (.close repo))
 
-(defn get-object-content
+(defn get-latest-commit-content
   "Return the object content as a string."
   [repo branch]
   (let [oid (ObjectId/fromString (:object branch))]
