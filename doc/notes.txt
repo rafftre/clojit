@@ -1,0 +1,18 @@
+
+I need to know common approaches to typical merge problems (where all of a sudden git loses a lot of its elegance)
+
+---
+
+"I don't commit that often because I don't have that much hard drive space." It's kind of true with git-lfs
+
+---
+
+https://news.ycombinator.com/item?id=37519834
+I use magit. You want a UI that allows you to easily see the changes in your worktree and add those line by line to the index, if necessary. Of course, you also want it to be easy to add whole files or hunks too, as always going line by line would be insane.
+A good commit means a good version. That's what we're doing after all: version control. Every commit you produce should be a valid standalone version of the software. Commits can build on each other, e.g. you can add feature a then subsequently add feature b that depends on feature a, but a maintainer should always be able to only take feature a, there shouldn't be bits of feature b in there, and there shouldn't be fixes for feature a in feature b's commit.
+With practice you can learn to make rough commits first then clean them up into proper commits later. For example, there are "end of day" commits and there are fixup commits. Those are both valid uses of git, but you shouldn't be exposing those to your team. You need to rebase them before sending them. A good git user will sow the seeds for a smooth rebase early. 
+
+---
+
+https://github.com/martinvonz/jj A Git-compatible DVCS that is both simple and powerful 
+https://www2.fossil-scm.org/home/doc/trunk/www/fossil-v-git.wiki Fossil Versus Git
